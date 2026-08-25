@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>원소와 주기율표 마스터 | 과학 학습 게임</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- 1. HOME SCREEN -->
+        <section id="screen-home" class="screen active">
+            <div class="card home-card">
+                <div class="brand-header">
+                    <div class="brand-icon"><i class="fa-solid fa-atom pulse-animation"></i></div>
+                    <h1>원소와 주기율표 마스터</h1>
+                    <p class="subtitle">중학교 2학년 과학 원자·원소·분자 정복 게임</p>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="btn-start" class="btn btn-primary btn-large">
+                        <i class="fa-solid fa-gamepad"></i> 게임 시작하기
+                    </button>
+                    <button type="button" id="btn-view-rankings" class="btn btn-secondary btn-large">
+                        <i class="fa-solid fa-trophy"></i> 명예의 전당 보러가기
+                    </button>
+                </div>
+
+                <div class="home-guide">
+                    <h3><i class="fa-solid fa-star"></i> 미션 가이드</h3>
+                    <div class="guide-steps">
+                        <div class="guide-step">
+                            <span class="step-num">1</span>
+                            <span class="step-text"><strong>원소 기호 매칭</strong><br>카드 뒤집기로 한글 이름과 기호 매칭</span>
+                        </div>
+                        <div class="guide-step">
+                            <span class="step-num">2</span>
+                            <span class="step-text"><strong>주기율표 빈칸 넣기</strong><br>원소를 선택해 올바른 위치에 배치</span>
+                        </div>
+                        <div class="guide-step">
+                            <span class="step-num">3</span>
+                            <span class="step-text"><strong>분자 완성하기</strong><br>원자들을 결합하여 제시된 화학식 조립</span>
+                        </div>
+                    </div>
+                    <p style="margin-top:16px;font-size:12px;color:var(--text-faint);">
+                        ※ 게임이 끝나면 점수를 명예의 전당에 등록할 때 반과 닉네임을 입력합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. GAME PLAY SCREEN -->
+        <section id="screen-game" class="screen">
+            <div class="game-header">
+                <div class="stage-badge"><span id="display-stage-title">STAGE 1: 원소 기호 매칭</span></div>
+                <div class="game-stats">
+                    <div class="stat-item score">
+                        <span class="label">SCORE</span>
+                        <span id="display-score" class="value">0</span>
+                    </div>
+                    <div class="stat-item timer">
+                        <span class="label"><i class="fa-solid fa-clock"></i> TIME</span>
+                        <div class="timer-bar-container"><div id="timer-bar" class="timer-bar"></div></div>
+                        <span id="display-time" class="value">60초</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stage 1: Card Match -->
+            <div id="stage-1-container" class="stage-container">
+                <div class="stage-instructions">
+                    <h2>원소의 이름과 알맞은 원소 기호 카드를 매칭하세요!</h2>
+                    <p>카드를 한 장씩 클릭하여 뒤집어 같은 원소를 연결하면 점수를 획득합니다.</p>
+                </div>
+                <div class="card-grid" id="card-grid"></div>
+            </div>
+
+            <!-- Stage 2: Periodic Table Puzzle -->
+            <div id="stage-2-container" class="stage-container d-none">
+                <div class="stage-instructions">
+                    <h2>주기율표의 빈자리(?)에 알맞은 원소를 배치하세요!</h2>
+                    <p>아래 원소 목록에서 원소를 먼저 선택한 뒤, 위 주기율표의 물음표(?) 칸을 클릭해 배치하세요.</p>
+                </div>
+                <div class="periodic-table-workspace"><div class="periodic-table-grid" id="periodic-table-grid"></div></div>
+                <div class="element-dock-section">
+                    <p class="dock-title">배치할 원소 목록 (원소를 선택한 뒤 위 주기율표의 물음표(?) 칸을 클릭하세요)</p>
+                    <div class="element-dock" id="element-dock"></div>
+                </div>
+            </div>
+
+            <!-- Stage 3: Molecule Builder -->
+            <div id="stage-3-container" class="stage-container d-none">
+                <div class="stage-instructions">
+                    <h2>제시된 분자식을 완성하기 위해 필요한 원자들을 배치하세요!</h2>
+                    <p>원자 보관함에서 필요한 원자를 클릭하여 반응 공간에 넣고, '분자 완성' 버튼을 누르세요.</p>
+                </div>
+                <div class="molecule-builder-layout">
+                    <div class="molecule-target-card">
+                        <div class="card-tag">미션 분자</div>
+                        <h2 id="molecule-name">이산화 탄소</h2>
+                        <h1 id="molecule-formula">CO<sub>2</sub></h1>
+                        <p id="molecule-desc">탄소 원자 1개와 산소 원자 2개가 결합한 분자</p>
+                        <div class="progress-indicator">분자 미션: <span id="molecule-progress">1 / 3</span></div>
+                    </div>
+                    <div class="molecule-workspace-panel">
+                        <div class="workspace-header">
+                            <span>원자 반응 실험실 (작업 공간)</span>
+                            <button type="button" id="btn-clear-workspace" class="btn-clear"><i class="fa-solid fa-trash-can"></i> 전체 비우기</button>
+                        </div>
+                        <div class="molecule-workspace" id="molecule-workspace">
+                            <div class="workspace-empty-message" id="workspace-empty-msg">
+                                <i class="fa-solid fa-flask"></i>
+                                <span>원자 보관함에서 원자를 추가하여 분자를 조립하세요.</span>
+                            </div>
+                        </div>
+                        <div class="formula-status">
+                            <span class="status-label">조립 현황:</span>
+                            <span id="molecule-current-formula" class="status-value">원자 없음</span>
+                        </div>
+                    </div>
+                    <div class="atoms-drawer-panel">
+                        <div class="drawer-header">원자 보관함 (클릭해서 추가)</div>
+                        <div class="atoms-drawer" id="atoms-drawer"></div>
+                    </div>
+                </div>
+                <div class="molecule-action-bar">
+                    <button type="button" id="btn-submit-molecule" class="btn btn-primary btn-large">
+                        <i class="fa-solid fa-vial-circle-check"></i> 분자 완성하기!
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. RESULT & LEADERBOARD SCREEN -->
+        <section id="screen-rankings" class="screen">
+            <div class="card ranking-card">
+                <div class="ranking-header">
+                    <div class="badge-icon"><i class="fa-solid fa-ranking-star"></i></div>
+                    <h1>실시간 명예의 전당</h1>
+                    <p class="subtitle">우리 학급의 최고 득점자들</p>
+                </div>
+
+                <!-- Result + Register -->
+                <div id="play-result-banner" class="play-result-banner d-none">
+                    <div class="confetti-icon">🎉</div>
+                    <h2>축하합니다! 게임 완료!</h2>
+                    <div class="result-details">
+                        <div class="result-score">
+                            <span class="res-label">내 최종 점수</span>
+                            <span id="player-final-score" class="res-value">0점</span>
+                        </div>
+                        <div class="score-breakdown">
+                            <span>1단계: <strong id="breakdown-s1">0</strong>점</span>
+                            <span>2단계: <strong id="breakdown-s2">0</strong>점</span>
+                            <span>3단계: <strong id="breakdown-s3">0</strong>점</span>
+                            <span>시간 보너스: <strong id="breakdown-bonus">0</strong>점</span>
+                        </div>
+                    </div>
+
+                    <form id="register-form" class="register-form">
+                        <p class="rf-title"><i class="fa-solid fa-trophy"></i> 명예의 전당에 내 점수 등록하기</p>
+                        <div class="rf-row">
+                            <select id="register-class" required>
+                                <option value="" disabled selected>반 선택</option>
+                                <option value="1">2학년 1반</option>
+                                <option value="2">2학년 2반</option>
+                                <option value="3">2학년 3반</option>
+                                <option value="4">2학년 4반</option>
+                                <option value="5">2학년 5반</option>
+                                <option value="6">2학년 6반</option>
+                            </select>
+                            <input type="text" id="register-nickname" placeholder="닉네임 입력 (최대 8자)" maxlength="8" required autocomplete="off">
+                        </div>
+                        <button type="submit" id="btn-register" class="btn btn-primary btn-large">
+                            <i class="fa-solid fa-upload"></i> 등록하기
+                        </button>
+                        <p id="register-status" class="register-status"></p>
+                    </form>
+
+                    <div id="my-rank-callout" class="my-rank-callout">
+                        현재 학년 전체 <strong id="my-rank-value">-</strong>등입니다!
+                    </div>
+                </div>
+
+                <!-- Public leaderboard: class-based -->
+                <div class="board-controls">
+                    <label for="board-class-select"><i class="fa-solid fa-users"></i> 우리 반 랭킹</label>
+                    <select id="board-class-select">
+                        <option value="1">2학년 1반</option>
+                        <option value="2">2학년 2반</option>
+                        <option value="3">2학년 3반</option>
+                        <option value="4">2학년 4반</option>
+                        <option value="5">2학년 5반</option>
+                        <option value="6">2학년 6반</option>
+                    </select>
+                    <span class="live-dot">실시간 반영중</span>
+                </div>
+
+                <div class="leaderboard-table-container">
+                    <table class="leaderboard-table" id="leaderboard-table">
+                        <thead>
+                            <tr><th style="width:15%;">순위</th><th style="width:35%;">닉네임</th><th style="width:20%;">점수</th><th style="width:30%;">기록 일시</th></tr>
+                        </thead>
+                        <tbody id="leaderboard-body"></tbody>
+                    </table>
+                    <div id="no-rank-message" class="no-rank-message d-none">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <p>아직 기록된 랭킹 데이터가 없습니다. 첫 게임의 주인공이 되어보세요!</p>
+                    </div>
+                </div>
+
+                <div class="ranking-action-bar">
+                    <button type="button" id="btn-back-home" class="btn btn-secondary btn-large">
+                        <i class="fa-solid fa-house"></i> 메인 화면으로
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 4. TEACHER ADMIN PANEL MODAL -->
+    <div class="modal-overlay" id="admin-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-user-gear"></i> 교사용 관리자 패널</h2>
+                <button type="button" class="btn-close-modal" id="btn-close-admin-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="admin-auth-section" id="admin-auth-section">
+                    <p>관리자 비밀번호를 입력해주세요.</p>
+                    <div class="password-input-group">
+                        <input type="password" id="admin-password" placeholder="비밀번호 입력">
+                        <button type="button" id="btn-auth-submit" class="btn btn-primary">확인</button>
+                    </div>
+                    <p class="auth-error-msg d-none" id="auth-error-msg">비밀번호가 올바르지 않습니다!</p>
+                </div>
+
+                <div class="admin-content-section d-none" id="admin-content-section">
+                    <div class="admin-summary-cards">
+                        <div class="admin-summary-card"><span class="sum-label">전체 등록 인원</span><span class="sum-value" id="admin-total-count">0명</span></div>
+                        <div class="admin-summary-card"><span class="sum-label">학년 최고 점수</span><span class="sum-value" id="admin-top-score">0점</span></div>
+                        <div class="admin-summary-card"><span class="sum-label">최다 참여 학급</span><span class="sum-value" id="admin-top-class">-</span></div>
+                    </div>
+
+                    <!-- 반별 랭킹 / 학년 전체 랭킹 탭 -->
+                    <div class="ranking-tabs">
+                        <button type="button" id="admin-tab-class" class="tab-btn active"><i class="fa-solid fa-users"></i> 반별 랭킹</button>
+                        <button type="button" id="admin-tab-grade" class="tab-btn"><i class="fa-solid fa-school"></i> 학년 전체 랭킹</button>
+                    </div>
+                    <div class="class-filter-container" id="admin-class-filter">
+                        <label for="admin-class-select">학급 선택:</label>
+                        <select id="admin-class-select">
+                            <option value="1">2학년 1반</option><option value="2">2학년 2반</option>
+                            <option value="3">2학년 3반</option><option value="4">2학년 4반</option>
+                            <option value="5">2학년 5반</option><option value="6">2학년 6반</option>
+                        </select>
+                    </div>
+
+                    <div class="admin-actions">
+                        <button type="button" id="btn-refresh-admin" class="btn btn-secondary"><i class="fa-solid fa-arrows-rotate"></i> 새로고침</button>
+                        <button type="button" id="btn-export-csv" class="btn btn-success"><i class="fa-solid fa-file-excel"></i> 엑셀용 CSV 다운로드</button>
+                        <button type="button" id="btn-reset-rankings" class="btn btn-danger"><i class="fa-solid fa-trash-arrow-up"></i> 전체 데이터 초기화</button>
+                    </div>
+
+                    <div class="admin-table-container">
+                        <h3 id="admin-table-title">전체 학생 플레이 데이터 내역</h3>
+                        <table class="admin-table" id="admin-table">
+                            <thead>
+                                <tr><th>순위</th><th>반</th><th>닉네임</th><th>총점</th><th>1단계</th><th>2단계</th><th>3단계</th><th>시간</th></tr>
+                            </thead>
+                            <tbody id="admin-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <footer class="app-footer">
+        <span class="footer-text">© 2026 과학 교육 플랫폼 | 중학교 2학년 원소 학습 시스템</span>
+        <button type="button" class="btn-admin-trigger" id="btn-admin-trigger"><i class="fa-solid fa-lock"></i> 교사용 모드</button>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
