@@ -10,7 +10,7 @@
 const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxt2MH-uLEdRs9LFUcmGumg3r5_7TKcvjuRDXcYrW40hVcE9w31goNA2rveN3HOlBw2Ug/exec";
 
 /* 교사용 관리자 모드 비밀번호 (필요시 변경하세요) */
-const ADMIN_PASSWORD = "science2026";
+const ADMIN_PASSWORD = "0108";
 
 /* 실시간 반영을 위한 자동 새로고침 주기 (ms) */
 const POLL_INTERVAL = 8000;
