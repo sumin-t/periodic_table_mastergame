@@ -218,14 +218,14 @@ html, body {
 }
 .match-card-front {
   background: var(--bg-elevated); border: 1px solid var(--border-strong);
-  font-size: 28px; color: var(--text-faint);
+  font-size: 22px; color: var(--text-faint);
 }
 .match-card-back {
   background: var(--bg-panel-2); border: 2px solid var(--tile-color, var(--cat-nonmetal));
   transform: rotateY(180deg); flex-direction: column; gap: 2px;
 }
-.match-card-back .tile-symbol { font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--tile-color, var(--cat-nonmetal)); }
-.match-card-back .tile-name { font-size: 15px; color: var(--text-secondary); font-weight: 600; }
+.match-card-back .tile-symbol { font-family: var(--font-display); font-weight: 800; font-size: 27px; color: var(--tile-color, var(--cat-nonmetal)); }
+.match-card-back .tile-name { font-size: 14px; color: var(--text-secondary); }
 .match-card.matched .match-card-back { opacity: 0.45; }
 .match-card.shake .match-card-inner { animation: shake 0.4s; }
 @keyframes shake {
@@ -367,6 +367,8 @@ html, body {
 .register-status.success { color: var(--cat-nonmetal); }
 .register-status.error { color: var(--cat-alkali); }
 .register-status.loading { color: var(--text-secondary); }
+.privacy-note { margin-top: 10px; font-size: 11.5px; line-height: 1.5; color: var(--text-faint); text-align: left; }
+.privacy-note i { margin-right: 4px; }
 
 .my-rank-callout {
   margin-top: 14px; padding: 12px 16px; border-radius: var(--radius-sm);

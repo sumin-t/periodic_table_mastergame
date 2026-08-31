@@ -7,10 +7,10 @@
    Google Apps Script를 웹앱으로 배포한 뒤 나오는 URL을 아래에 붙여넣으세요.
    (Code.gs 파일과 배포 방법은 함께 전달된 안내를 참고하세요.)
 ------------------------------------------------------------ */
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxt2MH-uLEdRs9LFUcmGumg3r5_7TKcvjuRDXcYrW40hVcE9w31goNA2rveN3HOlBw2Ug/exec";
+const GAS_WEB_APP_URL = "여기에_배포된_구글_앱스크립트_웹앱_URL을_붙여넣으세요";
 
 /* 교사용 관리자 모드 비밀번호 (필요시 변경하세요) */
-const ADMIN_PASSWORD = "0108";
+const ADMIN_PASSWORD = "science2026";
 
 /* 실시간 반영을 위한 자동 새로고침 주기 (ms) */
 const POLL_INTERVAL = 8000;
@@ -170,7 +170,7 @@ function initStage1() {
         <div class="match-card-face match-card-back" style="--tile-color:${elementColor(card.el.category)}">
           ${card.face === "symbol"
             ? `<span class="tile-symbol">${card.el.symbol}</span><span class="tile-name">기호</span>`
-            : `<span class="tile-symbol" style="font-size:15px;">${card.el.name}</span><span class="tile-name">이름</span>`}
+            : `<span class="tile-symbol" style="font-size:20px;">${card.el.name}</span><span class="tile-name">이름</span>`}
         </div>
       </div>`;
     div.addEventListener("click", () => onCardClick(idx));
