@@ -7,10 +7,10 @@
    Google Apps Script를 웹앱으로 배포한 뒤 나오는 URL을 아래에 붙여넣으세요.
    (Code.gs 파일과 배포 방법은 함께 전달된 안내를 참고하세요.)
 ------------------------------------------------------------ */
-const GAS_WEB_APP_URL = "여기에_배포된_구글_앱스크립트_웹앱_URL을_붙여넣으세요";
+const GAS_WEB_APP_URL = "https://docs.google.com/spreadsheets/d/1crwQGXTQ0S1bzqXGobwL8Jyed_Fcq8xNNfWDOc7p7y8/edit?usp=sharing";
 
 /* 교사용 관리자 모드 비밀번호 (필요시 변경하세요) */
-const ADMIN_PASSWORD = "science2026";
+const ADMIN_PASSWORD = "0108";
 
 /* 실시간 반영을 위한 자동 새로고침 주기 (ms) */
 const POLL_INTERVAL = 8000;
